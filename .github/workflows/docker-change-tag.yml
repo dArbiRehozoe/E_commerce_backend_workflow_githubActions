@@ -24,10 +24,14 @@ jobs:
         gcloud config set project elevated-apex-403206
         gcloud config set account env-test@elevated-apex-403206.iam.gserviceaccount.com
 
+    - name: Authentification Google Cloud
+      run: |
+        gcloud auth login
+
     - name: Récupérer les informations du cluster Kubernetes
       run: |
         gcloud container clusters get-credentials env-test-stage --region us-east1 --project elevated-apex-403206
 
     - name: Déployer l'application Kubernetes
       run: |
-        kubectl apply -f ./front.yml
+        kubectl apply -f kubernetes/front.yml
