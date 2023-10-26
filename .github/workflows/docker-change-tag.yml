@@ -21,9 +21,6 @@ jobs:
         curl -sSL https://sdk.cloud.google.com | bash
         exec -l $SHELL
         gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
-        gcloud init --console-only
-
-    - name: Utiliser l'outil de ligne de commande Google Cloud
-      run: |
-        # Vous pouvez désormais utiliser des commandes gcloud pour interagir avec Google Cloud.
+        gcloud config set project elevated-apex-403206
+        gcloud config set account env-test@elevated-apex-403206.iam.gserviceaccount.com
         gcloud compute instances list
