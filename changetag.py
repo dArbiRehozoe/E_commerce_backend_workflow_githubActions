@@ -1,6 +1,6 @@
 import requests
 import os
-TAG_TO_REPLACE = os.environ.get("TAG_TO_REPLACE","0.42")
+TAG_TO_REPLACE = os.environ.get("TAG_TO_REPLACE","0.1")
 DOCKERHUB_USERNAME = os.environ.get("DOCKERHUB_USERNAME")
 DOCKERHUB_REPO = os.environ.get("DOCKERHUB_REPO","testpush")
 DOCKERHUB_TOKEN = os.environ.get("DOCKERHUB_TOKEN")

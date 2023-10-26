@@ -1,6 +1,7 @@
 from decouple import config 
+import os
 # Configuration de la base de données MySQL
-SQLALCHEMY_DATABASE_URI = config('SQLALCHEMY_DATABASE_URI')
+SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI','mysql://root:root@db:3306/e_commerce')
 
 # Clé secrète pour les sessions Flask
 SECRET_KEY = 'your_secret_key'
