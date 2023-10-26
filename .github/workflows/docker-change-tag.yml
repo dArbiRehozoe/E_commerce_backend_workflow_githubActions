@@ -1,33 +1,19 @@
-name: Déployer sur Kubernetes
-
-on:
-  push:
-    branches:
-      - main
-
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
+  job_id:
     steps:
-    - name: Récupérer le code
-      uses: actions/checkout@v2
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
-    - name: Configurer l'outil de ligne de commande Google Cloud
-      env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
-      run: |
-        # Installer l'outil de ligne de commande gcloud
-        curl -sSL https://sdk.cloud.google.com | bash
-        exec -l $SHELL
-        gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
-        gcloud config set project elevated-apex-403206
-        gcloud config set account env-test@elevated-apex-403206.iam.gserviceaccount.com
+    - id: 'get-credentials'
+      uses: 'google-github-actions/get-gke-credentials@v1'
+      with:
+        cluster_name: 'my-cluster'
+        location: 'us-central1-a'
 
-    - name: Récupérer les informations du cluster Kubernetes
-      run: |
-        gcloud container clusters get-credentials env-test-stage --region us-east1 --project elevated-apex-403206
+    # The KUBECONFIG env var is automatically exported and picked up by kubectl.
+    - id: 'get-pods'
+      run: 'kubectl get pods'
 
-    - name: Déployer l'application Kubernetes
-      run: |
-        kubectl apply -f kubernetes/front.yml
+   
