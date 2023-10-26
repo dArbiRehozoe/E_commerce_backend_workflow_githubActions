@@ -1,9 +1,9 @@
 name: Update Docker Tag
 
 on:
-  pull_request:
-    types:
-      - opened
+  push:
+    branches:
+      - main
 
 jobs:
   build-and-rename-tag:
