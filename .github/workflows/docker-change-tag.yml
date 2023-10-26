@@ -23,5 +23,7 @@ jobs:
         gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
         gcloud config set project elevated-apex-403206
         gcloud config set account env-test@elevated-apex-403206.iam.gserviceaccount.com
-        gcloud container clusters get-credentials env-test-stage --region us-east1 --project elevated-apex-403206
-        kubectl apply -f kubernetis/front.yml
+    - name: lance contenair
+        run: |
+          gcloud container clusters get-credentials env-test-stage --region us-east1 --project elevated-apex-403206
+          kubectl apply -f kubernetis/front.yml
