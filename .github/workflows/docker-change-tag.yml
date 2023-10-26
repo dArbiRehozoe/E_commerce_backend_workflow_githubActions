@@ -20,6 +20,7 @@ jobs:
         # Installer l'outil de ligne de commande gcloud
         curl -sSL https://sdk.cloud.google.com | bash
         exec -l $SHELL
+        gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
         gcloud init --console-only
 
     - name: Utiliser l'outil de ligne de commande Google Cloud
