@@ -1,3 +1,10 @@
+name: Déployer sur Kubernetes
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   job_id:
     steps:
@@ -11,9 +18,7 @@ jobs:
       with:
         cluster_name: 'my-cluster'
         location: 'us-central1-a'
-
-    # The KUBECONFIG env var is automatically exported and picked up by kubectl.
+      
     - id: 'get-pods'
       run: 'kubectl get pods'
 
-   
