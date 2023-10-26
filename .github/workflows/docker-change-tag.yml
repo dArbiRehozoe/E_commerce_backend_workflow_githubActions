@@ -6,19 +6,21 @@ on:
       - main
 
 jobs:
-  job_id:
+  deploy:
+    runs-on: ubuntu-latest
+
     steps:
-    - id: 'auth'
+    - name: 'auth'
       uses: 'google-github-actions/auth@v1'
       with:
         credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
-    - id: 'get-credentials'
+    - name: 'get-credentials'
       uses: 'google-github-actions/get-gke-credentials@v1'
       with:
         cluster_name: 'my-cluster'
         location: 'us-central1-a'
       
-    - id: 'get-pods'
+    - name: 'get-pods'
       run: 'kubectl get pods'
-
+ 
