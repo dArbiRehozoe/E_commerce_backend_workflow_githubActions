@@ -1,4 +1,4 @@
-name: Update Docker Tag
+name: Se connecter à Google Cloud Shell
 
 on:
   push:
@@ -6,41 +6,23 @@ on:
       - main
 
 jobs:
-  build-and-rename-tag:
+  connect-to-google-cloud-shell:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Récupérer le code
+      uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9.17
+    - name: Configurer l'outil de ligne de commande Google Cloud
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
+      run: |
+        # Installer l'outil de ligne de commande gcloud
+        curl -sSL https://sdk.cloud.google.com | bash
+        exec -l $SHELL
+        gcloud init --console-only
 
-      - name: Install dependencies
-        run: |
-          pip install requests
-
-      - name: Login to Docker Hub
-        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-        
-      - name: Pull and retag the image latest
-        run: |
-          docker pull darbi/stage_app:latest
-          docker tag darbi/stage_app:latest darbi/stage_app:0.1
-          docker push darbi/stage_app:0.1
-          
-      - name: Execute the Python script
-        env:    
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-        run: |
-          python ./changetag.py
-          
-      - name: Build and tag new Docker image to latest
-        run: docker build -t darbi/stage_app:latest .
-
-      - name: Push Docker image
-        run: docker push darbi/stage_app:latest
+    - name: Utiliser l'outil de ligne de commande Google Cloud
+      run: |
+        # Vous pouvez désormais utiliser des commandes gcloud pour interagir avec Google Cloud.
+        gcloud compute instances list
