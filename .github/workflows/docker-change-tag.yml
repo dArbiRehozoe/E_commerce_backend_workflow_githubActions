@@ -1,4 +1,4 @@
-name: Se connecter à Google Cloud Shell
+name: Déployer sur Kubernetes
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  connect-to-google-cloud-shell:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,7 +23,11 @@ jobs:
         gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
         gcloud config set project elevated-apex-403206
         gcloud config set account env-test@elevated-apex-403206.iam.gserviceaccount.com
-    - name: lance contenair
+
+    - name: Récupérer les informations du cluster Kubernetes
       run: |
         gcloud container clusters get-credentials env-test-stage --region us-east1 --project elevated-apex-403206
-        kubectl apply -f kubernetis/front.yml
+
+    - name: Déployer l'application Kubernetes
+      run: |
+        kubectl apply -f ./front.yml
