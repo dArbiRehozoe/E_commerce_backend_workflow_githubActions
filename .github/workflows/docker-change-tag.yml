@@ -33,5 +33,5 @@ jobs:
         GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
       run: |
         gcloud container clusters get-credentials env-test-stage --region us-east1 --project elevated-apex-403206
-        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" front.yaml
-        kubectl apply -f front.yaml
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" Flask_app.yml
+        kubectl apply -f Flask_app.yml
