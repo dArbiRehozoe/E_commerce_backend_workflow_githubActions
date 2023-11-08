@@ -37,7 +37,7 @@ jobs:
         env:
           GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
         run: |
-          gcloud container clusters get-credentials env-test-stage --region us-east1 --project elevated-apex-403206
+          gcloud container clusters get-credentials env-prod-stage --region us-east1 --project elevated-apex-403206
           sed -i 's/image: darbi\/stage_app:latest/image: darbi\/stage_app:0.1/g' Flask_app.yml
           kubectl apply -f Flask_app.yml
       
@@ -45,6 +45,6 @@ jobs:
         env:
           GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
         run: |
-          gcloud container clusters get-credentials env-test-stage --region us-east1 --project elevated-apex-403206
+          gcloud container clusters get-credentials env-prod-stage --region us-east1 --project elevated-apex-403206
           sed -i 's/image: darbi\/stage_app:0.1/image: darbi\/stage_app:latest/g' Flask_app.yml
           kubectl apply -f Flask_app.yml
