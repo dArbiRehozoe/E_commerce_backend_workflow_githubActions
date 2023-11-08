@@ -62,17 +62,7 @@ jobs:
           GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
         run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev
-    
-
-      - name: deploy to gke
-        env:
-          GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
-        run: |
-          gcloud container clusters get-credentials env-test-stage --region us-east1 --project elevated-apex-403206
-          sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" front.yml
-          kubectl apply -f front.yml
-    
-
+  
       - name: reload gke
         env:
           GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
