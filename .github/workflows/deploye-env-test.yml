@@ -1,11 +1,9 @@
 name: pipeline ci/cd environnement test pull request
 
-
 on:
   pull_request:
     types:
       - opened
-
 
 jobs:
   build-and-rename-tag:
@@ -32,8 +30,8 @@ jobs:
       - name: Pull and retag the image latest
         run: |
           docker pull darbi/stage_app:latest
-          docker tag darbi/stage_app:latest darbi/stage_app:0.2
-          docker push darbi/stage_app:0.2
+          docker tag darbi/stage_app:latest darbi/stage_app:0.3
+          docker push darbi/stage_app:0.3
           
       - name: Execute the Python script
         env:    
