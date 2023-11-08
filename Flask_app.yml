@@ -20,8 +20,8 @@ spec:
           env:
             - name: SQLALCHEMY_DATABASE_URI
               value: 'mysql://root:root@mysql-service.default:3306/e_commerce'
-            - name: URL_FRONT_END
-              value: 'http://localhost'
+            - name: URL_FRONT_END  
+              value: 'http://34.148.69.79'
           ports:
             - containerPort: 5000 
 
