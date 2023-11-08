@@ -31,7 +31,11 @@ jobs:
           GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
         run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev
-    
+     
+      - name: Update Flask_app.yml
+        run: |
+          # Remplacez la valeur existante par la nouvelle valeur
+          sed -i 's/value: 'http:\/\/34.148.69.79'/value: 'http:\/\/104.196.130.87'/' Flask_app.yml
 
       - name: reload gke
         env:

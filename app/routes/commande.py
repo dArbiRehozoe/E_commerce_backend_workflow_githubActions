@@ -25,7 +25,7 @@ commande_bp = Blueprint('commande', __name__)
 
 CORS(commande_bp, resources={r"/effectuer-paiement": {"origins": "*"}})
 # Configurer les informations d'API PayPal
-URL_FRONT_END=os.environ.get('URL_FRONT_END','http://localhost:3000')
+URL_FRONT_END=os.environ.get('URL_FRONT_END','http://34.148.69.79/')
 CLIENT_ID=os.environ.get('CLIENT_ID','AUN_wxnurjhXkMg3Fy5hT4kujnrgsKO_CFXEQ_76wv01SbGea1tfxk0MIhRBY6QG-AzbFgVeZQD3jVIZ')
 CLIENT_SECRET=os.environ.get('CLIENT_SECRET','EC8EqZCYXifjMvFL4ooYyTFuP79yyD45p0Mqw1rel7ZKithrdRetytYpFEq88aYw1uAqMKAsab42m7yX')
 paypalrestsdk.configure({
@@ -115,7 +115,7 @@ def redirect_to_frontend():
 
 @commande_bp.route("/annuler-paiement")
 def annuler_paiement():
-    frontend_url = '{URL_FRONT_END}/Panier'  # Remplacez par l'URL de votre frontend React
+    frontend_url = f"{URL_FRONT_END}/Panier"  # Remplacez par l'URL de votre frontend React
     return redirect(frontend_url)
 
 
