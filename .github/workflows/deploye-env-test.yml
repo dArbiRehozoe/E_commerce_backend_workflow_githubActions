@@ -2,9 +2,9 @@ name: pipeline ci/cd environnement test pull request
 
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    types:
+      - opened
 
 
 jobs:
