@@ -248,7 +248,7 @@ def total_money_spent_last_7_days_by_day():
         if produit:
             # Assurez-vous que les valeurs sont converties en nombres avant l'addition
             montant_commande = int(commande.qt_produit) * int(produit.prix)
-            totals_by_day[day_of_week] += montant_commande
+            totals_by_day[day_of_week] = totals_by_day.get(day_of_week, 0) + montant_commande
 
     # Triez le dictionnaire en fonction de l'ordre des jours de la semaine en français
     sorted_totals = {day: totals_by_day[day] for day in ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche']}
