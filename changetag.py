@@ -2,7 +2,7 @@ import requests
 import os
 TAG_TO_REPLACE = os.environ.get("TAG_TO_REPLACE","latest")
 DOCKERHUB_USERNAME = os.environ.get("DOCKERHUB_USERNAME")
-DOCKERHUB_REPO = os.environ.get("DOCKERHUB_REPO","testpush")
+DOCKERHUB_REPO = os.environ.get("DOCKERHUB_REPO","stage_app")
 DOCKERHUB_TOKEN = os.environ.get("DOCKERHUB_TOKEN")
 DOCKERHUB_PASSWORD = os.environ.get("DOCKERHUB_PASSWORD")
 
