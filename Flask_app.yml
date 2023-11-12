@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: flask-app
-          image: darbi/stage_app:latest # Replace with your actual Flask app image
+          image: darbi/stage_app:0.1 # Replace with your actual Flask app image
           imagePullPolicy: Always
           # image: nginx
           env:
