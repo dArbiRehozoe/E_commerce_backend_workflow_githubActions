@@ -1,8 +1,6 @@
 from flask import Blueprint, request,jsonify, Response
 from app import db
 from app.models import Commande
-from flask_jwt_extended import jwt_required
-from flask_jwt_extended import jwt_required
 from app import app
 from app.models import User
 import datetime
@@ -244,13 +242,13 @@ def total_money_spent_last_7_days_by_day():
     commandes = db.session.query(Commande).filter(Commande.date >= seven_days_ago).all()
     for commande in commandes:
         # Utilisez la date de la commande pour obtenir le nom du jour de la semaine en français
-        day_of_week = commande.date.strftime('%A').lower()  # Convertir en minuscules
-        # Obtenez le produit associé à la commande
+        day_of_week = datetime.strptime(commande.date, '%Y-%m-%d').strftime('%A').lower()  # Convertir en minuscules
+     # Obtenez le produit associé à la commande
         produit = db.session.query(Product).get(commande.idproduit)
         if produit:
             # Assurez-vous que les valeurs sont converties en nombres avant l'addition
             montant_commande = int(commande.qt_produit) * int(produit.prix)
-            totals_by_day[day_of_week] += montant_commande
+            totals_by_day[day_of_week] = totals_by_day.get(day_of_week, 0) + montant_commande
 
     # Triez le dictionnaire en fonction de l'ordre des jours de la semaine en français
     sorted_totals = {day: totals_by_day[day] for day in ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche']}
