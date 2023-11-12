@@ -214,7 +214,6 @@ def obtenir_donnees_commandes(id_utilisateur):
 
 
 @app.route('/number_of_orders_by_category', methods=['GET'])
-@jwt_required()
 def number_of_orders_by_category():
     # Utilisez une requête SQL pour regrouper les commandes par catégorie de produit et calculer le prix total
     query = db.session.query(Product.categorie, db.func.sum(Commande.qt_produit * Product.prix).label('prixtotal')).\
@@ -231,7 +230,6 @@ def number_of_orders_by_category():
     return jsonify(results)
 
 @app.route('/total_money_spent_last_7_days_by_day', methods=['GET'])
-@jwt_required()
 def total_money_spent_last_7_days_by_day():
     # Configurez la locale en français
     locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
@@ -262,7 +260,6 @@ def total_money_spent_last_7_days_by_day():
 
 
 @app.route('/generate_pdf', methods=['POST'])
-@jwt_required()
 def generate_pdf():
     # Créer un fichier PDF
     data = request.get_json()
